@@ -12,7 +12,219 @@
             color: #333;
         }
         header {
+            background: #4CAF50;<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人網頁</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
             background: #4CAF50;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #333;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            padding: 2rem;
+            text-align: center;
+        }
+        #about {
+            background: #f4f4f4;
+        }
+        #portfolio {
+            background: #eaeaea;
+        }
+        #contact {
+            background: #f4f4f4;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: #333;
+            color: #fff;
+        }
+        pre {
+            text-align: left;
+            background: #f9f9f9;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>歡迎來到我的個人網頁</h1>
+        <p>探索我的世界，了解我的專業和興趣</p>
+    </header>
+    <nav>
+        <a href="#about">關於我</a>
+        <a href="#portfolio">作品集</a>
+        <a href="#contact">聯絡我</a>
+    </nav>
+    <section id="about">
+        <h2>關於我</h2>
+        <p>你好！我是 [你的名字]，一位熱衷於 [你的專業或興趣] 的人。我喜歡創造和解決問題。</p>
+    </section>
+    <section id="portfolio">
+        <h2>作品集</h2>
+        <p>以下是一些我過去的項目：</p>
+        <ul>
+            <li>項目一 - 簡短描述</li>
+            <li>項目二 - 簡短描述</li>
+            <li>項目三 - 簡短描述</li>
+            <li>
+                <p>大學生的日常.mp3</p>
+                <audio controls>
+                    <source src="path/to/大學生的日常.mp3" type="audio/mpeg">
+                    您的瀏覽器不支持音頻播放。
+                </audio>
+            </li>
+            <li>
+                <p>LINE 聊天機器人</p>
+                <p>掃描以下 QR Code 或點擊連結添加：</p>
+                <a href="https://line.me/R/ti/p/@039vwmeh" target="_blank">添加我的 LINE 聊天機器人</a>
+                <br>
+                <img src="path/to/line-qrcode.png" alt="LINE 聊天機器人 QR Code" style="max-width: 200px; margin-top: 1rem;">
+            </li>
+            <li>
+                <p>Google Apps Script - LINE Chatbot</p>
+                <p>以下是我實作的 Google Apps Script 程式碼：</p>
+                <pre>
+var LINE_CHANNEL_ACCESS_TOKEN = 'xxx'; // 請填入你的 Channel Access Token
+function initConversation() {
+  var userProperties = PropertiesService.getUserProperties();
+  var initialConversation = JSON.stringify([
+    {
+      "role": "user",
+      "parts": [{"text": "妳好"}]
+    },
+    {
+      "role": "model",
+      "parts": [{"text": "你好！請問您想聊些什麼呢？"}]
+    }
+  ]);
+  userProperties.setProperty('conversation', initialConversation);
+}
+function addMessageToConversation(role, message) {
+  var userProperties = PropertiesService.getUserProperties();
+  var conversation = JSON.parse(userProperties.getProperty('conversation') || '[]');
+  conversation.push({
+    "role": role,
+    "parts": [{"text": message}]
+  });
+  userProperties.setProperty('conversation', JSON.stringify(conversation));
+}
+function getConversation() {
+  var userProperties = PropertiesService.getUserProperties();
+  var conversation = userProperties.getProperty('conversation');
+  return conversation ? JSON.parse(conversation) : [];
+}
+function clearConversation() {
+  PropertiesService.getUserProperties().deleteProperty('conversation');
+}
+function callAI(message) {
+  var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyC32mSjCEfIvFBSBMycXmvG4AP-WcxrV_A';
+  addMessageToConversation("user", message);
+  var payload = {
+    "systemInstruction":{
+     "parts": [
+         {
+           "text": "你是一位喜劇演員，喜歡展現幽默感。 - 用台灣繁體中文"
+         }
+       ]
+     },
+    "contents": getConversation()
+  };
+  var options = {
+    'method': 'post',
+    'contentType': 'application/json',
+    'payload': JSON.stringify(payload)
+  };
+  var response = UrlFetchApp.fetch(url, options);
+  var json = JSON.parse(response.getContentText());
+  var aiResponse = json.candidates[0].content.parts[0].text;
+  addMessageToConversation("model", aiResponse);
+  Logger.log(aiResponse);
+  return aiResponse;
+}
+function handleUserMessage(message) {
+  var replyMessage = callAI(message);
+  return replyMessage;
+}
+function doPost(e) {
+  var contents = JSON.parse(e.postData.contents);
+  var events = contents.events;
+  for (var i = 0; i < events.length; i++) {
+    var event = events[i];
+    if (event.type == 'message' && event.message.type == 'text') {
+      var replyToken = event.replyToken;
+      var userMessage = event.message.text;
+      var replyMessage = handleUserMessage(userMessage);
+      replyToUser(replyToken, replyMessage);
+    }
+  }
+}
+function replyToUser(replyToken, message) {
+  var url = 'https://api.line.me/v2/bot/message/reply';
+  var payload = {
+    replyToken: replyToken,
+    messages: [{
+      type: 'text',
+      text: message
+    }]
+  };
+  var options = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + LINE_CHANNEL_ACCESS_TOKEN
+    },
+    payload: JSON.stringify(payload)
+  };
+  UrlFetchApp.fetch(url, options);
+}
+                </pre>
+            </li>
+        </ul>
+    </section>
+    <section id="contact">
+        <h2>聯絡我</h2>
+        <p>可以通過以下方式與我聯絡：</p>
+        <p>電子郵件：yourname@example.com</p>
+        <p>電話：123-456-7890</p>
+    </section>
+    <footer>
+        <p>&copy; 2025 [你的名字]. 保留所有權利。</p>
+    </footer>
+</body>
+</html>
+
             color: #fff;
             padding: 1rem 0;
             text-align: center;
