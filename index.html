@@ -1,225 +1,93 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人網站</title>
+    <title>個人網頁</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: "DFKai-SB", serif;
-            line-height: 1.8;
-            color: #2b2b2b;
-            background: #eef2f3;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
         }
-
         header {
-            background: #3b5998;
+            background: #4CAF50;
             color: #fff;
-            padding: 20px 0;
+            padding: 1rem 0;
             text-align: center;
-            border-bottom: 5px solid #2b477b;
         }
-
         header h1 {
-            font-size: 2.5em;
+            margin: 0;
+            font-size: 2.5rem;
         }
-
         nav {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
-            background: #f7f7f7;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: #333;
+            padding: 0.5rem 0;
         }
-
         nav a {
-            color: #3b5998;
+            color: #fff;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
+            margin: 0 1rem;
         }
-
         nav a:hover {
             text-decoration: underline;
         }
-
         section {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        section#about {
-            background: #ffffff;
-            border: 1px solid #dddddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        footer {
-            background: #2b477b;
-            color: #fff;
+            padding: 2rem;
             text-align: center;
-            padding: 10px 0;
-            border-top: 5px solid #1a3355;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
-
-        .game-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 20px;
+        #about {
+            background: #f4f4f4;
         }
-
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-gap: 5px;
+        #portfolio {
+            background: #eaeaea;
         }
-
-        .cell {
-            width: 100px;
-            height: 100px;
-            background: #f7f7f7;
-            border: 1px solid #d1d1d1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            cursor: pointer;
+        #contact {
+            background: #f4f4f4;
         }
-
-        .cell:hover {
-            background: #dfe3ee;
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: #333;
+            color: #fff;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>王大明</h1>
-        <p>歡迎來到我的個人網站</p>
+        <h1>歡迎來到我的個人網頁</h1>
+        <p>探索我的世界，了解我的專業和興趣</p>
     </header>
-
     <nav>
         <a href="#about">關於我</a>
-        <a href="#projects">我的作品</a>
-        <a href="#contact">聯絡方式</a>
-        <a href="#game">井字遊戲</a>
-        <a href="#music">我的音樂</a>
+        <a href="#portfolio">作品集</a>
+        <a href="#contact">聯絡我</a>
     </nav>
-
     <section id="about">
         <h2>關於我</h2>
-        <p>你好！我是王大明，一位來自土城的大學生。我熱衷於打籃球。</p>
+        <p>你好！我是 [你的名字]，一位熱衷於 [你的專業或興趣] 的人。我喜歡創造和解決問題。</p>
     </section>
-
-    <section id="projects">
-        <h2>我的作品</h2>
-        <p>以下是我參與的一些作品：</p>
+    <section id="portfolio">
+        <h2>作品集</h2>
+        <p>以下是一些我過去的項目：</p>
         <ul>
-            <li><strong>作品 1：</strong> 簡要描述。</li>
-            <li><strong>作品 2：</strong> 簡要描述。</li>
-            <li><strong>作品 3：</strong> 簡要描述。</li>
+            <li>項目一 - 簡短描述</li>
+            <li>項目二 - 簡短描述</li>
+            <li>項目三 - 簡短描述</li>
+            <li><a href="大學生的日常.mp3" download>大學生的日常.mp3</a> - 一段描述這段音樂的話</li>
         </ul>
     </section>
-
     <section id="contact">
-        <h2>聯絡方式</h2>
-        <p>如果您想與我聯繫，歡迎隨時聯絡！</p>
-        <p>電子郵件: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-        <p>電話: [你的電話號碼]</p>
+        <h2>聯絡我</h2>
+        <p>可以通過以下方式與我聯絡：</p>
+        <p>電子郵件：yourname@example.com</p>
+        <p>電話：123-456-7890</p>
     </section>
-
-    <section id="game">
-        <h2>井字遊戲</h2>
-        <div class="game-container">
-            <div id="board" class="board"></div>
-            <button onclick="resetGame()">重新開始</button>
-        </div>
-    </section>
-
-    <section id="music">
-        <h2>我的音樂</h2>
-        <p>以下是我創作的音樂作品：</p>
-        <audio controls>
-            <source src="小公主.mp3" type="audio/mpeg">
-            您的瀏覽器不支援音樂播放。
-        </audio>
-    </section>
-
     <footer>
-        <p>&copy; 2024 王大明. 版權所有。</p>
+        <p>&copy; 2025 [你的名字]. 保留所有權利。</p>
     </footer>
-
-    <script>
-        const board = document.getElementById('board');
-        let currentPlayer = 'X';
-        let gameBoard = Array(9).fill(null);
-
-        function createBoard() {
-            board.innerHTML = '';
-            gameBoard.forEach((cell, index) => {
-                const cellElement = document.createElement('div');
-                cellElement.classList.add('cell');
-                cellElement.dataset.index = index;
-                cellElement.textContent = cell;
-                cellElement.addEventListener('click', handleMove);
-                board.appendChild(cellElement);
-            });
-        }
-
-        function handleMove(event) {
-            const index = event.target.dataset.index;
-            if (!gameBoard[index]) {
-                gameBoard[index] = currentPlayer;
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                checkWinner();
-                createBoard();
-            }
-        }
-
-        function checkWinner() {
-            const winningCombinations = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8],
-                [0, 3, 6], [1, 4, 7], [2, 5, 8],
-                [0, 4, 8], [2, 4, 6]
-            ];
-
-            for (const combination of winningCombinations) {
-                const [a, b, c] = combination;
-                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                    alert(`${gameBoard[a]} 贏了！`);
-                    resetGame();
-                    return;
-                }
-            }
-
-            if (!gameBoard.includes(null)) {
-                alert('平手！');
-                resetGame();
-            }
-        }
-
-        function resetGame() {
-            gameBoard = Array(9).fill(null);
-            currentPlayer = 'X';
-            createBoard();
-        }
-
-        createBoard();
-    </script>
 </body>
 </html>
